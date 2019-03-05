@@ -1,22 +1,47 @@
 package com.wallace.rpg.openlegend
 
+import org.apache.jena.rdf.model.ModelFactory
+import org.apache.jena.riot.Lang
+import org.apache.jena.riot.RDFDataMgr
 import org.yaml.snakeyaml.Yaml
+import java.io.File
+import java.io.FileOutputStream
 import java.io.InputStream
 
 fun main(args: Array<String>) {
     val yaml = Yaml()
 
     val boons = getBoons(yaml)
-    println(boons)
+//    println(boons)
 
     val banes = getBanes(yaml)
-    println(banes)
+//    println(banes)
+
+    banes.forEach {
+        try {
+            it.attackAttributes
+        } catch (e: Exception) {
+            println(it.name)
+        }
+    }
 
     val feats = getFeats(yaml)
-    println(feats)
+//    println(feats)
 
-    val featPrereqTypes = feats.map { it.prerequisites.map { (it.value as Map<String, Any>).keys }.flatten() }.flatten().distinct()
-    println(featPrereqTypes)
+//    val featPrereqTypes = feats.map { it.prerequisites.map { (it.value as Map<String, Any>).keys }.flatten() }.flatten().distinct()
+//    println(featPrereqTypes)
+
+    val baneModels = banes.map(Bane::toModel)
+
+    val baneModel = ModelFactory.createDefaultModel()
+
+    baneModels.forEach {
+        baneModel.add(it)
+    }
+
+    val banesFile = File("src/main/resources/banes.ttl")
+
+    RDFDataMgr.write(FileOutputStream(banesFile), baneModel, Lang.TTL)
 }
 
 fun getBoons(yaml: Yaml): List<Boon> {
@@ -45,4 +70,8 @@ fun getFeats(yaml: Yaml): List<Feat> {
 
 private fun getYamlStream(filename: String): InputStream {
     return Yaml::class.java.classLoader.getResource(filename).openStream()
+}
+
+private fun getResourceFile(filename: String): File {
+    return File(Yaml::class.java.classLoader.getResource(filename).file)
 }
