@@ -1,3 +1,11 @@
+import com.wallace.tools.SchemagenTask
+
+buildscript {
+    repositories {
+        mavenCentral()
+    }
+}
+
 plugins {
     id 'java'
     id 'org.jetbrains.kotlin.jvm' version '1.3.11'
@@ -12,10 +20,25 @@ repositories {
     mavenCentral()
 }
 
+task schemagen(type: SchemagenTask) {
+    input = file("src/main/resources/openleged.ttl")
+    output = file("src/main/java/com/wallace/rpg/openlegend/ontology")
+    packageName = "com.wallace.rpg.openlegend.ontology"
+    ontology = true
+    noIndividuals = true
+}
+
+compileJava {
+    dependsOn schemagen
+}
+
 dependencies {
     compile "org.jetbrains.kotlin:kotlin-stdlib-jdk8"
     testCompile group: 'junit', name: 'junit', version: '4.12'
     compile group: 'org.yaml', name: 'snakeyaml', version: '1.20'
+
+    // https://mvnrepository.com/artifact/org.apache.jena/jena-arq
+    compile group: 'org.apache.jena', name: 'jena-arq', version: '3.10.0'
 }
 
 compileKotlin {
