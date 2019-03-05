@@ -58,12 +58,6 @@
 #    Data properties
 #################################################################
 
-###  http://openlegendrpg.com/ontology#costIs
-:costIs rdf:type owl:DatatypeProperty ;
-        rdfs:domain :Feat ;
-        rdfs:range xsd:integer .
-
-
 ###  http://openlegendrpg.com/ontology#descriptionIs
 :descriptionIs rdf:type owl:DatatypeProperty ;
                rdfs:range xsd:string .
@@ -89,6 +83,12 @@
 :hasAttack rdf:type owl:DatatypeProperty ;
            rdfs:domain :Bane ;
            rdfs:range xsd:string .
+
+
+###  http://openlegendrpg.com/ontology#hasCost
+:hasCost rdf:type owl:DatatypeProperty ;
+         rdfs:domain :Feat ;
+         rdfs:range xsd:integer .
 
 
 ###  http://openlegendrpg.com/ontology#hasPower

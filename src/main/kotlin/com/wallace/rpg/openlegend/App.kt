@@ -20,7 +20,7 @@ fun main(args: Array<String>) {
     banesToFile(banes)
 
     val feats = getFeats(yaml)
-//    println(feats)
+    featsToFile(feats)
 
 //    val featPrereqTypes = feats.map { it.prerequisites.map { (it.value as Map<String, Any>).keys }.flatten() }.flatten().distinct()
 //    println(featPrereqTypes)
@@ -74,6 +74,18 @@ fun getFeats(yaml: Yaml): List<Feat> {
     return yaml.load<List<Map<String, Any>>>(featStream).map {
         Feat(it)
     }
+}
+
+fun featsToFile(feats: List<Feat>) {
+    val featModel = ModelFactory.createDefaultModel().apply {
+        setNsPrefix("ol", Openleged.NS)
+    }
+
+    feats.forEach {
+        it.toModel(featModel)
+    }
+
+    saveModel("feats.ttl", featModel)
 }
 
 fun saveModel(filename: String, model: Model, lang: Lang = Lang.TTL) {
