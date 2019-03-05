@@ -1,5 +1,7 @@
 package com.wallace.rpg.openlegend
 
+import com.wallace.rpg.openlegend.ontology.Openleged
+import org.apache.jena.rdf.model.Model
 import org.apache.jena.rdf.model.ModelFactory
 import org.apache.jena.riot.Lang
 import org.apache.jena.riot.RDFDataMgr
@@ -12,18 +14,10 @@ fun main(args: Array<String>) {
     val yaml = Yaml()
 
     val boons = getBoons(yaml)
-//    println(boons)
+    boonsToFile(boons)
 
     val banes = getBanes(yaml)
-//    println(banes)
-
-    banes.forEach {
-        try {
-            it.attackAttributes
-        } catch (e: Exception) {
-            println(it.name)
-        }
-    }
+    banesToFile(banes)
 
     val feats = getFeats(yaml)
 //    println(feats)
@@ -31,17 +25,7 @@ fun main(args: Array<String>) {
 //    val featPrereqTypes = feats.map { it.prerequisites.map { (it.value as Map<String, Any>).keys }.flatten() }.flatten().distinct()
 //    println(featPrereqTypes)
 
-    val baneModels = banes.map(Bane::toModel)
 
-    val baneModel = ModelFactory.createDefaultModel()
-
-    baneModels.forEach {
-        baneModel.add(it)
-    }
-
-    val banesFile = File("src/main/resources/banes.ttl")
-
-    RDFDataMgr.write(FileOutputStream(banesFile), baneModel, Lang.TTL)
 }
 
 fun getBoons(yaml: Yaml): List<Boon> {
@@ -52,6 +36,18 @@ fun getBoons(yaml: Yaml): List<Boon> {
     }
 }
 
+fun boonsToFile(boons: List<Boon>) {
+    val boonModel = ModelFactory.createDefaultModel().apply {
+        setNsPrefix("ol", Openleged.NS)
+    }
+
+    boons.forEach {
+        it.toModel(boonModel)
+    }
+
+    saveModel("boons.ttl", boonModel)
+}
+
 fun getBanes(yaml: Yaml): List<Bane> {
     val baneStream = getYamlStream("banes.yml")
 
@@ -60,12 +56,30 @@ fun getBanes(yaml: Yaml): List<Bane> {
     }
 }
 
+fun banesToFile(banes: List<Bane>) {
+    val baneModel = ModelFactory.createDefaultModel().apply {
+        setNsPrefix("ol", Openleged.NS)
+    }
+
+    banes.forEach {
+        it.toModel(baneModel)
+    }
+
+    saveModel("banes.ttl", baneModel)
+}
+
 fun getFeats(yaml: Yaml): List<Feat> {
     val featStream = getYamlStream("feats.yml")
 
     return yaml.load<List<Map<String, Any>>>(featStream).map {
         Feat(it)
     }
+}
+
+fun saveModel(filename: String, model: Model, lang: Lang = Lang.TTL) {
+    val file = File("src/main/resources/$filename")
+
+    RDFDataMgr.write(FileOutputStream(file), model, lang)
 }
 
 private fun getYamlStream(filename: String): InputStream {

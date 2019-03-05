@@ -3,6 +3,7 @@ package com.wallace.rpg.openlegend
 import com.wallace.rpg.openlegend.ontology.Openleged
 import org.apache.jena.rdf.model.Model
 import org.apache.jena.rdf.model.ModelFactory
+import org.apache.jena.rdf.model.ResourceFactory
 import java.net.URLEncoder
 
 data class Bane(private val map: Map<String, Any>) {
@@ -19,10 +20,7 @@ data class Bane(private val map: Map<String, Any>) {
 
     private fun scrubString(string: String) = URLEncoder.encode(string, "UTF-8")
 
-    fun toModel(): Model {
-        val model = ModelFactory.createDefaultModel()
-        model.setNsPrefix("ol", Openleged.NS)
-
+    fun toModel(model: Model) {
         val baneResource = model.createResource("ol:${scrubString(name)}", Openleged.Bane)
 
         tags.forEach {
@@ -51,7 +49,5 @@ data class Bane(private val map: Map<String, Any>) {
         baneResource.addLiteral(Openleged.effectIs, effect)
 
         if (special != null) baneResource.addLiteral(Openleged.specialIs, special)
-
-        return model
     }
 }
