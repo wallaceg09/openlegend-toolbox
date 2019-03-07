@@ -192,6 +192,10 @@
                   rdfs:subClassOf :Prerequisite .
 
 
+###  http://openlegendrpg.com/ontology#Flaw
+:Flaw rdf:type owl:Class .
+
+
 ###  http://openlegendrpg.com/ontology#OtherPrerequisite
 :OtherPrerequisite rdf:type owl:Class ;
                    rdfs:subClassOf :Prerequisite .
@@ -213,6 +217,13 @@
 #    Individuals
 #################################################################
 
+###  http://openlegendrpg.com/ontology#Ageless
+:Ageless rdf:type owl:NamedIndividual ,
+                  :Perk ;
+         :effectIs "Whether you are an android constructed of space age material that does not erode over time, the loyal servant of a higher power, or the subject of an arcane ritual, you have unlocked the secret to immortality. You are immune to the passage of time and the effects of old age. Your body does not age and you cannot be harmed by extraordinary effects that cause aging. Based on the source of your agelessness, you can decide whether or not your appearance changes over time." ;
+         :nameIs "Ageless" .
+
+
 ###  http://openlegendrpg.com/ontology#Agility
 :Agility rdf:type owl:NamedIndividual ,
                   :Attribute ;
@@ -229,6 +240,41 @@
                     "Extraordinary" .
 
 
+###  http://openlegendrpg.com/ontology#Artisan
+:Artisan rdf:type owl:NamedIndividual ,
+                  :Perk ;
+         :effectIs "Choose a specific craft, such as gunsmithing, hardware assembly, glass blowing, or brewing. You are a master of a chosen craft, and your reputation goes far and wide. In a time frame decided by the GM, you can craft any mundane item of wealth level 2 or less, if you have access to the right tools. Furthermore, whenever you are performing a task in which your crafting skills would play a role, you gain advantage 1 to any action rolls that you must make. Your reputation means that other students of your craft may actively seek you out as a teacher. Experts in any field that makes use of the items you create will actively recommend that others seek you out. “You want the best overclocked CPU for that supercomputer? You need to talk to Razul, he’s the best hardware craftsman this side of the Third Sun.”" ;
+         :nameIs "Artisan" .
+
+
+###  http://openlegendrpg.com/ontology#Ascetic
+:Ascetic rdf:type owl:NamedIndividual ,
+                  :Perk ;
+         :effectIs "You are well-versed in the art of living with less. Whether a cloistered monk, a transcendent psion, or a wizened sage who spent years locked away in a tower of books, you are experienced at going long stretches of time with very little food, water, or company - and as such, these situations tend not to affect you as they do others. You are hardened against physical and mental deprivation and have developed an enviable degree of self-mastery. Whenever your asceticism would play a role in a situation, you gain advantage 1 to any relevant action rolls." ;
+         :nameIs "Ascetic" .
+
+
+###  http://openlegendrpg.com/ontology#Attractive
+:Attractive rdf:type owl:NamedIndividual ,
+                     :Perk ;
+            :effectIs "When it comes to physical appearance, you’re an absolute knockout. This plays to your favor more than just romantically, and your good looks tend to help you out in all sorts of social situations. Whenever your attractiveness would play a role in a situation, you gain advantage 1 to any relevant action rolls." ;
+            :nameIs "Attractive" .
+
+
+###  http://openlegendrpg.com/ontology#Brute
+:Brute rdf:type owl:NamedIndividual ,
+                :Perk ;
+       :effectIs "While others might convince with a silver tongue, you speak the universal language of fear. Once per game session, if you make a show of physical force, you can use your Might attribute for a Persuasion roll. If your Persuasion score is already greater than or equal to your Might score, you get advantage 1 on the roll." ;
+       :nameIs "Brute" .
+
+
+###  http://openlegendrpg.com/ontology#Courageous
+:Courageous rdf:type owl:NamedIndividual ,
+                     :Perk ;
+            :effectIs "When the odds are stacked against you, you never falter or waiver. Once per game session, as a free action you can cancel all negative effects afflicting you that relate to fear or low morale." ;
+            :nameIs "Courageous" .
+
+
 ###  http://openlegendrpg.com/ontology#Creation
 :Creation rdf:type owl:NamedIndividual ,
                    :Attribute ;
@@ -237,12 +283,47 @@
                   "Extraordinary" .
 
 
+###  http://openlegendrpg.com/ontology#Crowd_Favorite
+:Crowd_Favorite rdf:type owl:NamedIndividual ,
+                         :Perk ;
+                :effectIs "Whether you are an actor, musician, storyteller, magician, or some other type of performer, the common folk love your work. They adore you for your ability to use your art to transport them to a world beyond their daily drudgery, and you can always find a place to perform and make money at the local tavern or inn." ;
+                :nameIs "Crowd Favorite" .
+
+
 ###  http://openlegendrpg.com/ontology#Deception
 :Deception rdf:type owl:NamedIndividual ,
                     :Attribute ;
            :nameIs "Deception" ;
            :textIs "Tell a lie, bluff at cards, disguise yourself, spread rumors, swindle a sucker" ;
            :typeIs "Social" .
+
+
+###  http://openlegendrpg.com/ontology#Disease_Immunity
+:Disease_Immunity rdf:type owl:NamedIndividual ,
+                           :Perk ;
+                  :effectIs "You are immune to natural disease. This protection does not guard against supernatural curses such as lycanthropy." ;
+                  :nameIs "Disease Immunity" .
+
+
+###  http://openlegendrpg.com/ontology#Divine_Agent
+:Divine_Agent rdf:type owl:NamedIndividual ,
+                       :Perk ;
+              :effectIs "You serve a higher being and have earned their protection. Once per game session, when you are subject to a Finishing Blow while your hit points are below 1, you automatically heal to a hit point total of 1." ;
+              :nameIs "Divine Agent" .
+
+
+###  http://openlegendrpg.com/ontology#Divine_Insight
+:Divine_Insight rdf:type owl:NamedIndividual ,
+                         :Perk ;
+                :effectIs "You possess a supernatural connection to a deity, demi-god, or other divine being which grants you otherworldly insight. Once per game session, you can choose a topic relevant to the story. The GM shares some information about that topic which might be useful. If you’ve just failed a Learning attribute roll and use this ability, the GM decides whether to give you information related to that roll or to give you knowledge that is completely unrelated." ;
+                :nameIs "Divine Insight" .
+
+
+###  http://openlegendrpg.com/ontology#Ear_of_the_Emperor
+:Ear_of_the_Emperor rdf:type owl:NamedIndividual ,
+                             :Perk ;
+                    :effectIs "You have done something in the past to earn the favor of someone in a high place: a senator, the general of an army, a merchant lord, etc. Perhaps you saved their life or spared them from significant monetary loss. Whatever you did, they owe you, and they are willing to help you with minor favors as long as the favors do not subject them to any risk or cost. Once during the campaign, you can call in a large favor that does put your contact in risk or cost them something significant. They will perform the favor, but you immediately lose this trait, as their debt has been repaid." ;
+                    :nameIs "Ear of the Emperor" .
 
 
 ###  http://openlegendrpg.com/ontology#Energy

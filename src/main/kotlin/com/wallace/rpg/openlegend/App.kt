@@ -6,9 +6,8 @@ import org.apache.jena.rdf.model.ModelFactory
 import org.apache.jena.riot.Lang
 import org.apache.jena.riot.RDFDataMgr
 import org.yaml.snakeyaml.Yaml
-import java.io.File
-import java.io.FileOutputStream
-import java.io.InputStream
+import java.io.*
+import java.net.URL
 
 fun main(args: Array<String>) {
     val yaml = Yaml()
@@ -21,6 +20,12 @@ fun main(args: Array<String>) {
 
     val feats = getFeats(yaml)
     featsToFile(feats)
+
+    val perksFlawsInputStream =
+        URL("https://raw.githubusercontent.com/wallaceg09/core-rules/master/core/src/05-perks-flaws/01-chapter-five.md")
+            .openStream()
+
+    parsePerksAndFlaws(perksFlawsInputStream)
 
 //    val featPrereqTypes = feats.map { it.prerequisites.map { (it.value as Map<String, Any>).keys }.flatten() }.flatten().distinct()
 //    println(featPrereqTypes)
@@ -98,6 +103,95 @@ private fun getYamlStream(filename: String): InputStream {
     return Yaml::class.java.classLoader.getResource(filename).openStream()
 }
 
-private fun getResourceFile(filename: String): File {
-    return File(Yaml::class.java.classLoader.getResource(filename).file)
+private enum class PerkParseState {
+    NEITHER, IN_PERK, IN_FLAW
+}
+
+fun parsePerksAndFlaws(stream: InputStream) {
+    val perkLines = mutableListOf<String>()
+    val flawLines = mutableListOf<String>()
+
+    var state = PerkParseState.NEITHER
+
+    BufferedReader(InputStreamReader(stream)).useLines {
+        val iterator = it.iterator()
+
+        iterator.forEachRemaining { line ->
+            when (state) {
+                PerkParseState.IN_PERK -> perkLines.add(line)
+                PerkParseState.IN_FLAW -> flawLines.add(line)
+                else -> {
+                }
+            }
+            if (line.contains("## Perk Descriptions")) state = PerkParseState.IN_PERK
+            else if (line.contains("## Flaw Descriptions")) state = PerkParseState.IN_FLAW
+        }
+    }
+
+    val perks = mutableListOf<Perk>()
+    val flaws = mutableListOf<Flaw>()
+
+    val nameRegex = """### (?<name>\w+[\s\w]*)""".toRegex()
+    val effectRegx = """(?<effect>\w+[\s\w\p{Punct}]*)""".toRegex()
+
+    var name: String? = null
+    var effect: String? = null
+
+    for (perk in perkLines) {
+        if (perk.isBlank()) continue
+
+        val nameMatch = nameRegex.find(perk)
+        val effectMatch = effectRegx.find(perk)
+
+        val matchedName = nameMatch?.groups?.get("name")?.value
+        val matchedEffect = effectMatch?.groups?.get("effect")?.value
+
+        if (matchedName != null) {
+            name = matchedName
+        } else if (matchedEffect != null) {
+            effect = matchedEffect
+            perks.add(Perk(name!!, effect))
+        } else {
+            println("Dis fucked: $perk")
+        }
+    }
+
+    for (flaw in flawLines) {
+        if (flaw.isBlank()) continue
+
+        val nameMatch = nameRegex.find(flaw)
+        val effectMatch = effectRegx.find(flaw)
+
+        val matchedName = nameMatch?.groups?.get("name")?.value
+        val matchedEffect = effectMatch?.groups?.get("effect")?.value
+
+        if (matchedName != null) {
+            name = matchedName
+        } else if (matchedEffect != null) {
+            effect = matchedEffect
+            flaws.add(Flaw(name!!, effect))
+        } else {
+            println("Dis fucked: $flaw")
+        }
+    }
+
+    val perkModel = ModelFactory.createDefaultModel().apply {
+        setNsPrefix("ol", Openleged.NS)
+    }
+
+    perks.forEach {
+        it.toModel(perkModel)
+    }
+
+    saveModel("perks.ttl", perkModel)
+
+    val flawModel = ModelFactory.createDefaultModel().apply {
+        setNsPrefix("ol", Openleged.NS)
+    }
+
+    flaws.forEach {
+        it.toModel(flawModel)
+    }
+
+    saveModel("flaws.ttl", flawModel)
 }
