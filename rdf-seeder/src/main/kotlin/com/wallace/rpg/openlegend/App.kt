@@ -94,7 +94,7 @@ fun featsToFile(feats: List<Feat>) {
 }
 
 fun saveModel(filename: String, model: Model, lang: Lang = Lang.TTL) {
-    val file = File("build/turtle/$filename").apply {
+    val file = File("rdf-seeder/src/main/resources/seed/$filename").apply {
         parentFile.mkdirs()
     }
 

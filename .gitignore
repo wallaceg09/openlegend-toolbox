@@ -3,3 +3,5 @@
 build
 out
 src/main/java/com/wallace/rpg/openlegend/ontology
+rdf-seeder/src/main/java/com/wallace/rpg/openlegend/ontology
+rdf-seeder/src/main/resources/seed

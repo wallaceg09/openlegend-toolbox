@@ -2,8 +2,6 @@ package com.wallace.rpg.openlegend
 
 import com.wallace.rpg.openlegend.ontology.Openleged
 import org.apache.jena.rdf.model.Model
-import org.apache.jena.rdf.model.ModelFactory
-import org.apache.jena.rdf.model.ResourceFactory
 import java.net.URLEncoder
 
 data class Bane(private val map: Map<String, Any>) {

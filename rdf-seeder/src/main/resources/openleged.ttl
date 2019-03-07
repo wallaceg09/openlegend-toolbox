@@ -1,0 +1,376 @@
+@prefix : <http://openlegendrpg.com/ontology#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix xml: <http://www.w3.org/XML/1998/namespace> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@base <http://openlegendrpg.com/ontology> .
+
+<http://openlegendrpg.com/ontology> rdf:type owl:Ontology .
+
+#################################################################
+#    Object Properties
+#################################################################
+
+###  http://openlegendrpg.com/ontology#hasAnyPrerequisite
+:hasAnyPrerequisite rdf:type owl:ObjectProperty ;
+                    rdfs:domain :Feat ;
+                    rdfs:range :Prerequisite .
+
+
+###  http://openlegendrpg.com/ontology#hasAttackAttribute
+:hasAttackAttribute rdf:type owl:ObjectProperty ;
+                    rdfs:domain :Bane ;
+                    rdfs:range :Attribute .
+
+
+###  http://openlegendrpg.com/ontology#hasAttribute
+:hasAttribute rdf:type owl:ObjectProperty ;
+              rdfs:domain :Boon ;
+              rdfs:range :Attribute .
+
+
+###  http://openlegendrpg.com/ontology#hasAttributeScore
+:hasAttributeScore rdf:type owl:ObjectProperty ;
+                   rdfs:domain :Character ;
+                   rdfs:range :AttributeScore .
+
+
+###  http://openlegendrpg.com/ontology#hasPrerequisite
+:hasPrerequisite rdf:type owl:ObjectProperty ;
+                 rdfs:domain :Feat ;
+                 rdfs:range :Prerequisite .
+
+
+###  http://openlegendrpg.com/ontology#isInstanceOf
+:isInstanceOf rdf:type owl:ObjectProperty ;
+              rdfs:domain :AttributeScore ;
+              rdfs:range :Attribute .
+
+
+###  http://openlegendrpg.com/ontology#speedIs
+:speedIs rdf:type owl:ObjectProperty ;
+         rdfs:domain :Character ;
+         rdfs:range :Speed .
+
+
+#################################################################
+#    Data properties
+#################################################################
+
+###  http://openlegendrpg.com/ontology#descriptionIs
+:descriptionIs rdf:type owl:DatatypeProperty ;
+               rdfs:range xsd:string .
+
+
+###  http://openlegendrpg.com/ontology#distanceIs
+:distanceIs rdf:type owl:DatatypeProperty ;
+            rdfs:domain :Speed ;
+            rdfs:range xsd:integer .
+
+
+###  http://openlegendrpg.com/ontology#durationIs
+:durationIs rdf:type owl:DatatypeProperty ;
+            rdfs:range xsd:string .
+
+
+###  http://openlegendrpg.com/ontology#effectIs
+:effectIs rdf:type owl:DatatypeProperty ;
+          rdfs:range xsd:string .
+
+
+###  http://openlegendrpg.com/ontology#hasAttack
+:hasAttack rdf:type owl:DatatypeProperty ;
+           rdfs:domain :Bane ;
+           rdfs:range xsd:string .
+
+
+###  http://openlegendrpg.com/ontology#hasCost
+:hasCost rdf:type owl:DatatypeProperty ;
+         rdfs:domain :Feat ;
+         rdfs:range xsd:integer .
+
+
+###  http://openlegendrpg.com/ontology#hasPower
+:hasPower rdf:type owl:DatatypeProperty ;
+          rdfs:range xsd:integer .
+
+
+###  http://openlegendrpg.com/ontology#hasTag
+:hasTag rdf:type owl:DatatypeProperty ;
+        rdfs:range xsd:string .
+
+
+###  http://openlegendrpg.com/ontology#invocationTimeIs
+:invocationTimeIs rdf:type owl:DatatypeProperty ;
+                  rdfs:range xsd:string .
+
+
+###  http://openlegendrpg.com/ontology#nameIs
+:nameIs rdf:type owl:DatatypeProperty ;
+        rdfs:range xsd:string .
+
+
+###  http://openlegendrpg.com/ontology#raceIs
+:raceIs rdf:type owl:DatatypeProperty ;
+        rdfs:domain :Character ;
+        rdfs:range xsd:string .
+
+
+###  http://openlegendrpg.com/ontology#scoreIs
+:scoreIs rdf:type owl:DatatypeProperty ;
+         rdfs:domain :AttributeScore ;
+         rdfs:range xsd:integer .
+
+
+###  http://openlegendrpg.com/ontology#sizeIs
+:sizeIs rdf:type owl:DatatypeProperty ;
+        rdfs:range xsd:string .
+
+
+###  http://openlegendrpg.com/ontology#specialIs
+:specialIs rdf:type owl:DatatypeProperty ;
+           rdfs:range xsd:string .
+
+
+###  http://openlegendrpg.com/ontology#textIs
+:textIs rdf:type owl:DatatypeProperty ;
+        rdfs:domain :Attribute ;
+        rdfs:range xsd:string .
+
+
+###  http://openlegendrpg.com/ontology#typeIs
+:typeIs rdf:type owl:DatatypeProperty ;
+        rdfs:range xsd:string .
+
+
+###  http://openlegendrpg.com/ontology#unitIs
+:unitIs rdf:type owl:DatatypeProperty ;
+        rdfs:domain :Speed ;
+        rdfs:range xsd:string .
+
+
+#################################################################
+#    Classes
+#################################################################
+
+###  http://openlegendrpg.com/ontology#Action
+:Action rdf:type owl:Class .
+
+
+###  http://openlegendrpg.com/ontology#Attribute
+:Attribute rdf:type owl:Class .
+
+
+###  http://openlegendrpg.com/ontology#AttributePrerequisite
+:AttributePrerequisite rdf:type owl:Class ;
+                       rdfs:subClassOf :Prerequisite .
+
+
+###  http://openlegendrpg.com/ontology#AttributeScore
+:AttributeScore rdf:type owl:Class .
+
+
+###  http://openlegendrpg.com/ontology#Bane
+:Bane rdf:type owl:Class .
+
+
+###  http://openlegendrpg.com/ontology#Boon
+:Boon rdf:type owl:Class .
+
+
+###  http://openlegendrpg.com/ontology#Character
+:Character rdf:type owl:Class .
+
+
+###  http://openlegendrpg.com/ontology#Feat
+:Feat rdf:type owl:Class .
+
+
+###  http://openlegendrpg.com/ontology#FeatPrerequisite
+:FeatPrerequisite rdf:type owl:Class ;
+                  rdfs:subClassOf :Prerequisite .
+
+
+###  http://openlegendrpg.com/ontology#Flaw
+:Flaw rdf:type owl:Class .
+
+
+###  http://openlegendrpg.com/ontology#OtherPrerequisite
+:OtherPrerequisite rdf:type owl:Class ;
+                   rdfs:subClassOf :Prerequisite .
+
+
+###  http://openlegendrpg.com/ontology#Perk
+:Perk rdf:type owl:Class .
+
+
+###  http://openlegendrpg.com/ontology#Prerequisite
+:Prerequisite rdf:type owl:Class .
+
+
+###  http://openlegendrpg.com/ontology#Speed
+:Speed rdf:type owl:Class .
+
+
+#################################################################
+#    Individuals
+#################################################################
+
+###  http://openlegendrpg.com/ontology#Agility
+:Agility rdf:type owl:NamedIndividual ,
+                  :Attribute ;
+         :nameIs "Agility" ;
+         :textIs "Dodge attacks, move with stealth, perform acrobatics, shoot a bow, pick a pocket" ;
+         :typeIs "Physical" .
+
+
+###  http://openlegendrpg.com/ontology#Alteration
+:Alteration rdf:type owl:NamedIndividual ,
+                     :Attribute ;
+            :nameIs "Alteration" ;
+            :textIs "Change shape, alter molecular structures, transmute one material into another" ,
+                    "Extraordinary" .
+
+
+###  http://openlegendrpg.com/ontology#Creation
+:Creation rdf:type owl:NamedIndividual ,
+                   :Attribute ;
+          :nameIs "Channel higher powers, manifest something from nothing, regenerate, divinely bolster" ,
+                  "Creation" ,
+                  "Extraordinary" .
+
+
+###  http://openlegendrpg.com/ontology#Deception
+:Deception rdf:type owl:NamedIndividual ,
+                    :Attribute ;
+           :nameIs "Deception" ;
+           :textIs "Tell a lie, bluff at cards, disguise yourself, spread rumors, swindle a sucker" ;
+           :typeIs "Social" .
+
+
+###  http://openlegendrpg.com/ontology#Energy
+:Energy rdf:type owl:NamedIndividual ,
+                 :Attribute ;
+        :nameIs "Energy" ;
+        :textIs "Create and control the elements—fire, cold, electricity" ;
+        :typeIs "Extraordinary" .
+
+
+###  http://openlegendrpg.com/ontology#Entropy
+:Entropy rdf:type owl:NamedIndividual ,
+                  :Attribute ;
+         :nameIs "Entropy" ;
+         :textIs "Disintegrate matter, kill with a word, create undead, sicken others" ,
+                 "Extraordinary" .
+
+
+###  http://openlegendrpg.com/ontology#Fortitude
+:Fortitude rdf:type owl:NamedIndividual ,
+                    :Attribute ;
+           :nameIs "Fortitude" ;
+           :textIs "Resist poison, shrug off pain, survive in a desert, wear heavy armor" ;
+           :typeIs "Physical" .
+
+
+###  http://openlegendrpg.com/ontology#Influence
+:Influence rdf:type owl:NamedIndividual ,
+                    :Attribute ;
+           :nameIs "Influence" ;
+           :textIs "Control the minds of others, speak telepathically, instill fear, create illusory figments, cloak with invisibility" ;
+           :typeIs "Extraordinary" .
+
+
+###  http://openlegendrpg.com/ontology#Learning
+:Learning rdf:type owl:NamedIndividual ,
+                   :Attribute ;
+          :nameIs "Learning" ;
+          :textIs "Recall facts about history, arcane magic, the natural world, or any information you picked up from an external source" ;
+          :typeIs "Mental" .
+
+
+###  http://openlegendrpg.com/ontology#Logic
+:Logic rdf:type owl:NamedIndividual ,
+                :Attribute ;
+       :nameIs "Logic" ;
+       :textIs "Innovate a new crafting method, decipher a code, jury-rig a device, get the gist of a language you don’t speak" ;
+       :typeIs "Mental" .
+
+
+###  http://openlegendrpg.com/ontology#Might
+:Might rdf:type owl:NamedIndividual ,
+                :Attribute ;
+       :nameIs "Might" ;
+       :textIs "Swing a maul, jump over a chasm, break down a door, wrestle a foe to submission" ;
+       :typeIs "Physical" .
+
+
+###  http://openlegendrpg.com/ontology#Movement
+:Movement rdf:type owl:NamedIndividual ,
+                   :Attribute ;
+          :nameIs "Movement" ;
+          :textIs "Teleport, fly, hasten, telekinetically push" ;
+          :typeIs "Extraordinary" .
+
+
+###  http://openlegendrpg.com/ontology#Perception
+:Perception rdf:type owl:NamedIndividual ,
+                     :Attribute ;
+            :nameIs "Perception" ;
+            :textIs "Sense ulterior motives, track someone, catch a gut feeling, spot a hidden foe, find a secret door" ;
+            :typeIs "Mental" .
+
+
+###  http://openlegendrpg.com/ontology#Persuasion
+:Persuasion rdf:type owl:NamedIndividual ,
+                     :Attribute ;
+            :nameIs "Negotiate a deal, convince someone, haggle a good price, pry information" ,
+                    "Persuasion" ;
+            :typeIs "Social" .
+
+
+###  http://openlegendrpg.com/ontology#Prescience
+:Prescience rdf:type owl:NamedIndividual ,
+                     :Attribute ;
+            :nameIs "Prescience" ;
+            :textIs "See the future, read minds or auras, view from afar, detect magic or evil, communicate with extraplanar entities" ;
+            :typeIs "Extraordinary" .
+
+
+###  http://openlegendrpg.com/ontology#Presence
+:Presence rdf:type owl:NamedIndividual ,
+                   :Attribute ;
+          :nameIs "Give a speech, sing a song, inspire an army, exert your force of personality, have luck smile upon you" ,
+                  "Presence" ,
+                  "Social" .
+
+
+###  http://openlegendrpg.com/ontology#Protection
+:Protection rdf:type owl:NamedIndividual ,
+                     :Attribute ;
+            :nameIs "Protection" ;
+            :textIs "Protect from damage, break supernatural influence, dispel magic, exile extradimensional beings" ;
+            :typeIs "Extraordinary" .
+
+
+###  http://openlegendrpg.com/ontology#Will
+:Will rdf:type owl:NamedIndividual ,
+               :Attribute ;
+      :nameIs "Will" ;
+      :textIs "Maintain your resolve, resist torture, study long hours, stay awake on watch, stave off insanity" ;
+      :typeIs "Mental" .
+
+
+#################################################################
+#    General axioms
+#################################################################
+
+[ rdf:type owl:AllDisjointClasses ;
+  owl:members ( :AttributePrerequisite
+                :FeatPrerequisite
+                :OtherPrerequisite
+              )
+] .
+
+
+###  Generated by the OWL API (version 4.2.8.20170104-2310) https://github.com/owlcs/owlapi

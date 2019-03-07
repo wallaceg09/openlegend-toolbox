@@ -1,2 +1,3 @@
 rootProject.name = 'openlegend-toolbox'
+include 'rdf-seeder'
 
