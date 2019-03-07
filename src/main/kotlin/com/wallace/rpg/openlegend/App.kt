@@ -34,7 +34,7 @@ fun main(args: Array<String>) {
 }
 
 fun getBoons(yaml: Yaml): List<Boon> {
-    val boonStream = getYamlStream("boons.yml")
+    val boonStream = URL("https://raw.githubusercontent.com/wallaceg09/core-rules/master/boons/boons.yml").openStream()
 
     return yaml.load<List<Map<String, Any>>>(boonStream).map {
         Boon(it)
@@ -54,7 +54,7 @@ fun boonsToFile(boons: List<Boon>) {
 }
 
 fun getBanes(yaml: Yaml): List<Bane> {
-    val baneStream = getYamlStream("banes.yml")
+    val baneStream = URL("https://raw.githubusercontent.com/wallaceg09/core-rules/master/banes/banes.yml").openStream()
 
     return yaml.load<List<Map<String, Any>>>(baneStream).map {
         Bane(it)
@@ -74,7 +74,7 @@ fun banesToFile(banes: List<Bane>) {
 }
 
 fun getFeats(yaml: Yaml): List<Feat> {
-    val featStream = getYamlStream("feats.yml")
+    val featStream = URL("https://raw.githubusercontent.com/wallaceg09/core-rules/master/feats/feats.yml").openStream()
 
     return yaml.load<List<Map<String, Any>>>(featStream).map {
         Feat(it)
@@ -94,7 +94,9 @@ fun featsToFile(feats: List<Feat>) {
 }
 
 fun saveModel(filename: String, model: Model, lang: Lang = Lang.TTL) {
-    val file = File("src/main/resources/$filename")
+    val file = File("build/turtle/$filename").apply {
+        parentFile.mkdirs()
+    }
 
     RDFDataMgr.write(FileOutputStream(file), model, lang)
 }

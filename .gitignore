@@ -3,8 +3,3 @@
 build
 out
 src/main/java/com/wallace/rpg/openlegend/ontology
-src/main/resources/banes.ttl
-src/main/resources/boons.ttl
-src/main/resources/feats.ttl
-src/main/resources/flaws.ttl
-src/main/resources/perks.ttl
